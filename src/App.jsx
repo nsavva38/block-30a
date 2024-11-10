@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Library from "./components/Library.jsx"
 import SelectedBook from "./components/SelectedBook.jsx";
 import Register from "./components/Register.jsx";
+import Account from "./components/Account.jsx";
 
 
 const App = () => {
-
+  const navigate = useNavigate();
   const [accessToken, setAccessToken] = useState(``);
 
 
@@ -22,8 +23,8 @@ const App = () => {
       {
         accessToken ? 
         <>
-          <button onClick={() => {setAccessToken(``)}}>Log Out</button>
-          <section>Account</section>
+          <button onClick={() => {setAccessToken(``); navigate(`/books`)}}>Log Out</button>
+          <Link to={`/account`}>Account</Link>
         </>
         :
         <Link to={"/register"}>Log In</Link>
@@ -35,6 +36,7 @@ const App = () => {
       <Route path="/books" element={<Library />}/>
       <Route path="/register" element={<Register setAccessToken={setAccessToken}/>} />
       <Route path="/books/:id" element={<SelectedBook accessToken={accessToken}/>}/>
+      <Route path="/account" element={<Account accessToken={accessToken}/>} />
      </Routes>
     </>
   )

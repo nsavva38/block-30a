@@ -15,7 +15,7 @@ const Register = ( {setAccessToken }) => {
   const addUser = async (event) => {
     event.preventDefault();
     
-    const response = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/register`, {
+    await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/register`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ const Register = ( {setAccessToken }) => {
   const logIn = async (event) => {
     event.preventDefault();
 
-    const response = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/login`,{
+    await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/login`,{
       method: "POST",
       headers: {
         'Content-Type': 'application/json',

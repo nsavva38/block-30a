@@ -40,13 +40,17 @@ const SelectedBook = ({ accessToken }) => {
         />
         <h1>{selectedBook.title}<br></br>by {selectedBook.author}</h1>
         <p>{selectedBook.description}</p>
-        <p>{String(selectedBook.available)}</p>
+
         {
           accessToken ?
-          <>
-            <button onClick={() => {checkOut()}}>Checkout</button>
-            <button onClick={() => {returnBook()}}>Return</button>
-          </>
+            selectedBook.available ?
+            <>
+              <>Available</>
+              <button onClick={() => {checkOut()}}>Checkout</button>
+
+            </>
+              :
+              <>Unavailable</>
           : null
         }
       </section>
@@ -57,3 +61,7 @@ const SelectedBook = ({ accessToken }) => {
 }
 
 export default SelectedBook
+
+
+
+// https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books/${bookId} GET, PATCH
