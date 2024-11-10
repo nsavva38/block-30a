@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom"
 
-const SelectedBook = () => {
+const SelectedBook = ({ accessToken }) => {
   const [selectedBook, setSelectedBook] = useState({})
   const { id } = useParams();
   const navigate = useNavigate();
@@ -41,8 +41,14 @@ const SelectedBook = () => {
         <h1>{selectedBook.title}<br></br>by {selectedBook.author}</h1>
         <p>{selectedBook.description}</p>
         <p>{String(selectedBook.available)}</p>
-        <button onClick={() => {checkOut()}}>Checkout</button>
-        <button onClick={() => {returnBook()}}>Return</button>
+        {
+          accessToken ?
+          <>
+            <button onClick={() => {checkOut()}}>Checkout</button>
+            <button onClick={() => {returnBook()}}>Return</button>
+          </>
+          : null
+        }
       </section>
       <br></br>
       <button onClick={() => { navigate(`/books`) }}>Back To Library</button>

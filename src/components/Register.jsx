@@ -1,6 +1,9 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 const Register = ( {setAccessToken }) => {
+
+  const navigate = useNavigate();
   const [inputFirstName, setInputFirstName] = useState(``);
   const [inputLastName, setInputLastName] = useState(``);
   const [inputEmail, setInputEmail] = useState(``);
@@ -35,11 +38,33 @@ const Register = ( {setAccessToken }) => {
     setInputEmail(``);
     setInputPassword(``);
 
+    navigate(`/books`);
+
   } 
 
-  const logIn = (event) => {
+  const logIn = async (event) => {
     event.preventDefault();
-    console.log(`log in`);
+
+    const response = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/login`,{
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: userEmail,
+        password: userPassword
+      })
+    }).then(response => response.json())
+      .then(result => {
+        console.log(result);
+        setAccessToken(result.token)
+      })
+      .catch(console.error);
+
+    setUserEmail(``);
+    setUserPassword(``)
+
+    navigate(`/books`);
   }
 
 

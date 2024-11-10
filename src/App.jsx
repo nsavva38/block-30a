@@ -20,10 +20,11 @@ const App = () => {
     <>
      <nav>
       {
-        console.log(accessToken)
-      }
-      {
-        accessToken ? <button onClick={() => {setAccessToken(``)}}>Log Out</button>
+        accessToken ? 
+        <>
+          <button onClick={() => {setAccessToken(``)}}>Log Out</button>
+          <section>Account</section>
+        </>
         :
         <Link to={"/register"}>Log In</Link>
       }
@@ -33,7 +34,7 @@ const App = () => {
      <Routes>
       <Route path="/books" element={<Library />}/>
       <Route path="/register" element={<Register setAccessToken={setAccessToken}/>} />
-      <Route path="/books/:id" element={<SelectedBook />}/>
+      <Route path="/books/:id" element={<SelectedBook accessToken={accessToken}/>}/>
      </Routes>
     </>
   )
