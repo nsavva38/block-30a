@@ -1,0 +1,13 @@
+body {
+  background-color: grey;
+}
+
+#all-books {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#all-books > section {
+  margin: 10px;
+  flex-direction: column;
+}
