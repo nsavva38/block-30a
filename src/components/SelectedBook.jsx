@@ -25,6 +25,8 @@ const SelectedBook = () => {
     <section id="selected-book">
       <img src={selectedBook.coverimage} 
         alt={selectedBook.title}
+        height="300"
+
       />
       <h1>{selectedBook.title}</h1>
       <h3>by {selectedBook.author}</h3>
