@@ -20,6 +20,11 @@ body {
   flex-direction: column;
 }
 
+#register {
+  margin: 10px;
+  flex-direction: column;
+}
+
 
 
 

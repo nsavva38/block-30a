@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom"
 
 const Library = () => {
 
   const [libraryBooks, setLibraryBooks] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getBooks = async () => {
@@ -32,7 +34,7 @@ const Library = () => {
         {
           libraryBooks.map((book) => {
             return (
-              <section key={book.id}>
+              <section onClick={() => {navigate(`/books/${book.id}`)}}key={book.id}>
                   <img 
                     src={book.coverimage} 
                     height="200" 
