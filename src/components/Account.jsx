@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom";
 
 const Account = ({ accessToken }) => {
-  const navigate = useNavigate();
   const [user, setUser] = useState({});
   const [checkedBooks, setCheckedBooks] = useState([]);
 
@@ -39,7 +37,7 @@ const Account = ({ accessToken }) => {
       })
       .catch(console.error);
   }
-  
+
   useEffect(() => {
     getCheckedBooks();
   }, [])
@@ -72,6 +70,9 @@ const Account = ({ accessToken }) => {
         <h3>Checked Out Books</h3>
         <section id="all-books">
         {
+          checkedBooks.length <= 0 ?
+          <h4>No checked books</h4>
+          :
           checkedBooks.map((reservedBook) => {
             return (
               <section>
