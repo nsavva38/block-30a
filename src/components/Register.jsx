@@ -29,7 +29,8 @@ const Register = ( {setAccessToken }) => {
       }).then(response => response.json())
         .then(result => {
           console.log(result);
-          setAccessToken(result.token)
+          setAccessToken(result.token);
+          localStorage.setItem('token', result.token);
         })
         .catch(console.error);
     
@@ -57,7 +58,8 @@ const Register = ( {setAccessToken }) => {
     }).then(response => response.json())
       .then(result => {
         console.log(result);
-        setAccessToken(result.token)
+        setAccessToken(result.token);
+        localStorage.setItem('token', result.token);
       })
       .catch(console.error);
 

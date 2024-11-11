@@ -10,9 +10,13 @@ import Account from "./components/Account.jsx";
 
 const App = () => {
   const navigate = useNavigate();
-  const [accessToken, setAccessToken] = useState(``);
+  const [accessToken, setAccessToken] = useState(localStorage.getItem('token'));
 
-
+const logOut = () => {
+  localStorage.removeItem('token');
+  setAccessToken(``);
+  navigate(`/books`);
+}
 
 
 //--------------------------------RETURN--------------------------------//
@@ -23,7 +27,7 @@ const App = () => {
       {
         accessToken ? 
         <>
-          <button onClick={() => {setAccessToken(``); navigate(`/books`)}}>Log Out</button>
+          <button onClick={() => {logOut()}}>Log Out</button>
           <Link to={`/account`}>Account</Link>
         </>
         :
