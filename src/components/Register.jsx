@@ -65,6 +65,7 @@ const Register = ( {setAccessToken }) => {
 
     setUserEmail(``);
     setUserPassword(``)
+    
 
     navigate(`/books`);
   }
