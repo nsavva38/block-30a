@@ -6,15 +6,15 @@ const SelectedBook = ({ accessToken }) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const getSelectedBook = async () => {
+    const response = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books/${id}`);
+    const responseJSON = await response.json();
+    const book = responseJSON.book;
+    console.log(`book:`, book);
+    setSelectedBook(book);
+  }
 
   useEffect(() => {
-    const getSelectedBook = async () => {
-      const response = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books/${id}`);
-      const responseJSON = await response.json();
-      const book = responseJSON.book;
-      console.log(`book:`, book);
-      setSelectedBook(book);
-    }
 
     getSelectedBook();
   }, [])
@@ -34,11 +34,10 @@ const SelectedBook = ({ accessToken }) => {
         console.log(result);
       })
       .catch(console.error);
+      getSelectedBook();
   }
 
-  const returnBook = () => {
-    console.log(`Return Book`);
-  }
+
 
 
 //--------------------------------RETURN--------------------------------//

@@ -26,23 +26,39 @@ const Account = ({ accessToken }) => {
   }, [])
 
 
+  const getCheckedBooks = async () => {
+    await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/reservations`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+    }).then(response => response.json())
+      .then(result => {
+        console.log(result);
+        setCheckedBooks(result.reservation);
+      })
+      .catch(console.error);
+  }
+  
   useEffect(() => {
-    const getCheckedBooks = async () => {
-      await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/reservations`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`
-        },
-      }).then(response => response.json())
-        .then(result => {
-          console.log(result);
-          setCheckedBooks(result.reservation);
-        })
-        .catch(console.error);
-    }
     getCheckedBooks();
   }, [])
 
+  const returnBook = async (reservedBookID) => {
+    console.log(`book returned`, reservedBookID);
+    await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/reservations/${reservedBookID}`, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+    }).then(response => response.json())
+      .then(result => {
+        console.log(result);
+      })
+      .catch(console.error);
+      getCheckedBooks();
+  }
 
 //--------------------------------RETURN--------------------------------//
 
@@ -58,13 +74,14 @@ const Account = ({ accessToken }) => {
         {
           checkedBooks.map((reservedBook) => {
             return (
-              <section onClick={() => {navigate(`/account/${reservedBook.id}`)}}key={reservedBook.id}>
+              <section>
                   <img 
                     src={reservedBook.coverimage} 
                     height="200" 
                     alt={reservedBook.title}
                   />
                   <p>{reservedBook.title}<br></br>by {reservedBook.author}</p>
+                  <button onClick={() => {returnBook(reservedBook.id)}}>Return Book</button>
               </section>
             )
           })
@@ -81,3 +98,5 @@ export default Account
 
 
 // https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/reservations GET
+
+// https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/reservations/:reservationId DELETE

@@ -6,7 +6,6 @@ import Library from "./components/Library.jsx"
 import SelectedBook from "./components/SelectedBook.jsx";
 import Register from "./components/Register.jsx";
 import Account from "./components/Account.jsx";
-import ReservedBook from "./components/ReservedBook.jsx"
 
 
 const App = () => {
@@ -38,7 +37,6 @@ const App = () => {
       <Route path="/register" element={<Register setAccessToken={setAccessToken}/>} />
       <Route path="/books/:id" element={<SelectedBook accessToken={accessToken}/>}/>
       <Route path="/account" element={<Account accessToken={accessToken}/>} />
-      <Route path="/account/:id" element={<ReservedBook />} />
      </Routes>
     </>
   )
