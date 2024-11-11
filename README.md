@@ -1,5 +1,12 @@
 # Block 30A
 
+
+Test Account:
+  firstname: anakin
+  lastname: skywalker
+  email: anakin@starwars.com
+  password: padme
+
 Requirements:
 
   Tier I - Build a basic Frontend Application
