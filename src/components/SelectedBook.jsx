@@ -19,8 +19,21 @@ const SelectedBook = ({ accessToken }) => {
     getSelectedBook();
   }, [])
 
-  const checkOut = () => {
-    console.log(`Checkout`);
+  const checkOut = async () => {
+    await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books/${id}`, {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify({
+        available: false,
+      })
+    }).then(response => response.json())
+      .then(result => {
+        console.log(result);
+      })
+      .catch(console.error);
   }
 
   const returnBook = () => {
